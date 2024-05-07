@@ -1,5 +1,6 @@
 import * as THREE from "three";
-import {OrbitControls } from "jsm/controls/OrbitControls.js";
+import { FontLoader, TextGeometry } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
+import { OrbitControls } from 'jsm/controls/OrbitControls.js';
 
 const w = window.innerWidth;
 const h = window.innerHeight; 
@@ -12,36 +13,32 @@ const aspect = w / h;
 const near = 0.1;
 const far = 10;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 2;
+camera.position.z = 5;
 const scene = new THREE.Scene();
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.03;
+const controls = new OrbitControls(camera, renderer.domElement)
 
-const geo = new THREE.IcosahedronGeometry(1.0, 2);
-const mat = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
-    flatShading: true
-});
-const mesh = new THREE.Mesh(geo, mat);
-scene.add(mesh);
+var fontLoader = new FontLoader();
 
-const wireMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
-    wireframe:true
-})
-const wireMesh = new THREE.Mesh(geo, wireMat);
-wireMesh.scale.setScalar(1.001)
-mesh.add(wireMesh);
+        fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+      
+            var textGeometry = new TextGeometry("Hello World", {
+                font: font,
+                size: .5,
+                height: 1,
+            });
 
-const hemiLight = new THREE.HemisphereLight(0x0099ff, 0xaa5500) 
-scene.add(hemiLight);
+           const textMaterial = new THREE.MeshNormalMaterial();
+           const textMesh = new THREE.Mesh(textGeometry, textMaterial)
+           textMesh.position.x = -2;
 
-function animate(t = 0){
-    requestAnimationFrame(animate);
-  // mesh.rotation.y = t * 0.0001;
-renderer.render(scene, camera);
-controls.update()
-} 
-animate()
+            scene.add(textMesh)
+        });
+
+function animate() {
+	requestAnimationFrame( animate );
+
+	renderer.render( scene, camera );
+}
+
+animate();
