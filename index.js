@@ -13,7 +13,7 @@ const aspect = w / h;
 const near = 0.1;
 const far = 10;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 5;
+camera.position.z = 7;
 const scene = new THREE.Scene();
 
 const controls = new OrbitControls(camera, renderer.domElement)
@@ -24,13 +24,14 @@ var fontLoader = new FontLoader();
       
             var textGeometry = new TextGeometry("Hello World", {
                 font: font,
-                size: .5,
-                height: 1,
+                size: 1,
+                height: .5,
+                depth: 0,
             });
 
            const textMaterial = new THREE.MeshNormalMaterial();
            const textMesh = new THREE.Mesh(textGeometry, textMaterial)
-           textMesh.position.x = -2;
+          textMesh.position.x = -4;
 
             scene.add(textMesh)
         });
