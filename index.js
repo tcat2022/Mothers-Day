@@ -17,7 +17,7 @@ const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 const scene = new THREE.Scene();
 //camera.position.z = 5;
 const controls = new OrbitControls(camera, renderer.domElement)
-//controls.minPolarAngle = Math.PI/1.5;
+controls.minPolarAngle = Math.PI/2.85;
 controls.maxPolarAngle = Math.PI/1.85;
 controls.enableDamping = true;
 controls.enablePan = false;
@@ -71,6 +71,7 @@ camera.position.z = -4;
 camera.position.z += distance;
 
 controls.update();
+
         });
 
         function onWindowResize() {
