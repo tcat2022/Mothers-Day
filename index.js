@@ -6,7 +6,7 @@ const w = window.innerWidth;
 const h = window.innerHeight; 
 const renderer  = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(w,h)
-renderer.setClearColor(new THREE.Color('#08A19C'));
+renderer.setClearColor(new THREE.Color('#5FE7E7'));
 document.body.appendChild(renderer.domElement)
 
 const fov = 70;
@@ -24,16 +24,16 @@ controls.enableZoom = false;
 let textMaterial;
 let textMesh;
 
-const geometry = new THREE.PlaneGeometry( 7, 4 , );
+const geometry = new THREE.PlaneGeometry( 7, 4  );
 const material = new THREE.MeshBasicMaterial( {color:'lightgreen', side: THREE.DoubleSide} );
 const plane = new THREE.Mesh( geometry, material );
 plane.rotation.x = Math.PI / 2;
 plane.position.y = -.5
 scene.add( plane );
 
-let hemlight = new THREE.HemisphereLight('#ffffff','black',1.75)
+let hemlight = new THREE.HemisphereLight('#FEF3F7','#45001A',1.75)
 scene.add(hemlight)
-let ambiantlight = new THREE.AmbientLight('0xffffff',.5)
+let ambiantlight = new THREE.AmbientLight('#ffffff',.5)
 scene.add(ambiantlight)
 
 var fontLoader = new FontLoader();
@@ -47,7 +47,7 @@ var fontLoader = new FontLoader();
                 depth: 0,
                
             });
-            textMaterial = new THREE.MeshStandardMaterial({color:'#FC0B6E'})
+            textMaterial = new THREE.MeshStandardMaterial({color:'#FF0362'})
             textMesh = new THREE.Mesh(textGeometry, textMaterial)
             textMesh.receiveShadow = true;
             textMesh.position.set(-3, 0, 0);
