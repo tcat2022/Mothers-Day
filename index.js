@@ -2,8 +2,8 @@ import * as THREE from "three";
 import { FontLoader, TextGeometry } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 import { OrbitControls } from 'jsm/controls/OrbitControls.js';
 
-const w = window.innerWidth;
-const h = window.innerHeight; 
+let w = window.innerWidth;
+let  h = window.innerHeight; 
 const renderer  = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(w,h)
 renderer.setClearColor(new THREE.Color('#5FE7E7'));
@@ -17,10 +17,10 @@ const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 const scene = new THREE.Scene();
 //camera.position.z = 5;
 const controls = new OrbitControls(camera, renderer.domElement)
-//controls.minPolarAngle = Math.PI/2;
-//controls.maxPolarAngle = Math.PI/2;
+//controls.minPolarAngle = Math.PI/1.5;
+controls.maxPolarAngle = Math.PI/1.85;
 controls.enableDamping = true;
-//controls.enableZoom = false;
+controls.enablePan = false;
 let textMaterial;
 let textMesh;
 
@@ -51,6 +51,7 @@ var fontLoader = new FontLoader();
             textMesh = new THREE.Mesh(textGeometry, textMaterial)
             textMesh.receiveShadow = true;
             textMesh.position.set(-3, 0, 0);
+            
             
             scene.add(textMesh)
             // Calculate the bounding box of the text mesh
