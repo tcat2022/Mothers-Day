@@ -17,12 +17,19 @@ const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 const scene = new THREE.Scene();
 camera.position.z = 5;
 const controls = new OrbitControls(camera, renderer.domElement)
-controls.minPolarAngle = Math.PI/2;
-controls.maxPolarAngle = Math.PI/2;
+//controls.minPolarAngle = Math.PI/2;
+//controls.maxPolarAngle = Math.PI/2;
 controls.enableDamping = true;
 controls.enableZoom = false;
 let textMaterial;
 let textMesh;
+
+const geometry = new THREE.PlaneGeometry( 7, 4 , );
+const material = new THREE.MeshBasicMaterial( {color:'lightgreen', side: THREE.DoubleSide} );
+const plane = new THREE.Mesh( geometry, material );
+plane.rotation.x = Math.PI / 2;
+plane.position.y = -.5
+scene.add( plane );
 
 let hemlight = new THREE.HemisphereLight('#ffffff','black',1.75)
 scene.add(hemlight)
