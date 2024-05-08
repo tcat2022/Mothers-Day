@@ -5,8 +5,9 @@ import { OrbitControls } from 'jsm/controls/OrbitControls.js';
 const w = window.innerWidth;
 const h = window.innerHeight; 
 const renderer  = new THREE.WebGLRenderer({antialias: true});
-renderer.setSize(w, h);
-document.body.appendChild( renderer.domElement );
+renderer.setSize(w,h)
+renderer.setClearColor(new THREE.Color('#08A19C'));
+document.body.appendChild(renderer.domElement)
 
 const fov = 70;
 const aspect = w / h;
@@ -19,26 +20,32 @@ const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI/2;
 controls.maxPolarAngle = Math.PI/2;
 controls.enableDamping = true;
+controls.enableZoom = false;
 let textMaterial;
 let textMesh;
+
+let hemlight = new THREE.HemisphereLight('#ffffff','black',1.75)
+scene.add(hemlight)
+let ambiantlight = new THREE.AmbientLight('0xffffff',.5)
+scene.add(ambiantlight)
 
 var fontLoader = new FontLoader();
 
         fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
       
-            var textGeometry = new TextGeometry( 'Happy ' + 'Mothers ' + '\nDay', {
+            var textGeometry = new TextGeometry( 'Happy ' + 'Mothers ' + ' Day', {
                 font: font,
                 size:.5,
                 height: .4,
                 depth: 0,
+               
             });
-
-            textMaterial = new THREE.MeshNormalMaterial();
+            textMaterial = new THREE.MeshStandardMaterial({color:'#FC0B6E'})
             textMesh = new THREE.Mesh(textGeometry, textMaterial)
-            textMesh.position.set(-4, 0, 0);
-
+            textMesh.receiveShadow = true;
+            textMesh.position.set(-3, 0, 0);
+            
             scene.add(textMesh)
-           
             // Calculate the bounding box of the text mesh
 var boundingBox = new THREE.Box3().setFromObject(textMesh);
 var center = boundingBox.getCenter(new THREE.Vector3());
@@ -51,9 +58,9 @@ let  distance = Math.abs(maxDim / Math.sin(fov1 / 2));
 
 // Set the camera position and target
 camera.position.copy(center);
+camera.position.z = -4.5;
 camera.position.z += distance;
 
-controls.target.copy(center);
 controls.update();
         });
 
@@ -61,7 +68,7 @@ function animate() {
 	requestAnimationFrame( animate );
 controls.update()
 	renderer.render( scene, camera );
-    console.log(camera.position.z)
+   // console.log(camera.position.z)
 }
 
 animate();
