@@ -66,6 +66,7 @@ let  distance = Math.abs(maxDim / Math.sin(fov1 / 2));
 // Set the camera position and target
 camera.position.copy(center);
 camera.position.z = -4.5;
+ distance += Math.abs(4.5 / Math.sin(fov1 / 2));
 camera.position.z += distance;
 
 controls.update();
@@ -78,7 +79,16 @@ controls.update();
             camera.aspect = w / h;
             camera.updateProjectionMatrix();
         
-            renderer.setSize(w, h);
+            
+    renderer.setSize(w, h);
+
+    // Resize text
+    scene.remove(textMesh);
+    createText();
+    
+    // Resize plane
+    scene.remove(plane);
+    createPlane();
         }
         
         window.addEventListener('resize', onWindowResize);
