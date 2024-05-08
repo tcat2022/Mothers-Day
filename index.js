@@ -15,7 +15,7 @@ const near = 0.1;
 const far = 1000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 const scene = new THREE.Scene();
-camera.position.z = 5;
+//camera.position.z = 5;
 const controls = new OrbitControls(camera, renderer.domElement)
 //controls.minPolarAngle = Math.PI/2;
 //controls.maxPolarAngle = Math.PI/2;
@@ -65,8 +65,8 @@ let  distance = Math.abs(maxDim / Math.sin(fov1 / 2));
 
 // Set the camera position and target
 camera.position.copy(center);
-camera.position.z = -4.5;
- distance += Math.abs(4.5 / Math.sin(fov1 / 2));
+camera.position.z = -4;
+ distance += Math.abs(2.5/ Math.sin(fov1 / 2));
 camera.position.z += distance;
 
 controls.update();
