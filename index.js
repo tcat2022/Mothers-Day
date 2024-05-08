@@ -49,21 +49,17 @@ var fontLoader = new FontLoader();
             });
             textMaterial = new THREE.MeshStandardMaterial({color:'#FF0362'})
             textMesh = new THREE.Mesh(textGeometry, textMaterial)
-            textMesh.receiveShadow = true;
-            textMesh.position.set(-3, 0, 0);
-            
+            textMesh.position.set(-3, 0, 0);      
             
             scene.add(textMesh)
             // Calculate the bounding box of the text mesh
 var boundingBox = new THREE.Box3().setFromObject(textMesh);
 var center = boundingBox.getCenter(new THREE.Vector3());
-
 // Calculate the distance from the camera to the object based on the bounding box size
  let size = boundingBox.getSize(new THREE.Vector3());
 let  maxDim = Math.max(size.x, size.y, size.z);
 let  fov1 = camera.fov * (Math.PI / 180);
 let  distance = Math.abs(maxDim / Math.sin(fov1 / 2));
-
 // Set the camera position and target
 camera.position.copy(center);
 camera.position.z = -4;
@@ -99,6 +95,7 @@ function animate() {
 	requestAnimationFrame( animate );
 controls.update()
 	renderer.render( scene, camera );
+    light.position.copy(camera.position);
     console.log(camera.position.z)
 }
 
