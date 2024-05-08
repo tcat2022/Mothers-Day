@@ -9,10 +9,10 @@ renderer.setSize(w,h)
 renderer.setClearColor(new THREE.Color('#5FE7E7'));
 document.body.appendChild(renderer.domElement)
 
-const fov = 70;
+const fov = 75;
 const aspect = w / h;
 const near = 0.1;
-const far = 10;
+const far = 1000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 const scene = new THREE.Scene();
 camera.position.z = 5;
@@ -20,7 +20,7 @@ const controls = new OrbitControls(camera, renderer.domElement)
 //controls.minPolarAngle = Math.PI/2;
 //controls.maxPolarAngle = Math.PI/2;
 controls.enableDamping = true;
-controls.enableZoom = false;
+//controls.enableZoom = false;
 let textMaterial;
 let textMesh;
 
@@ -71,11 +71,23 @@ camera.position.z += distance;
 controls.update();
         });
 
+        function onWindowResize() {
+            w = window.innerWidth;
+            h = window.innerHeight;
+        
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+        
+            renderer.setSize(w, h);
+        }
+        
+        window.addEventListener('resize', onWindowResize);
+
 function animate() {
 	requestAnimationFrame( animate );
 controls.update()
 	renderer.render( scene, camera );
-   // console.log(camera.position.z)
+    console.log(camera.position.z)
 }
 
 animate();
