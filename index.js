@@ -31,19 +31,19 @@ plane.rotation.x = Math.PI / 2;
 plane.position.y = -.5
 scene.add( plane );
 
-let hemlight = new THREE.HemisphereLight('#FEF3F7','#45001A',1.75)
+let hemlight = new THREE.HemisphereLight('#FEF3F7','#1C1A1B',1.75)
 scene.add(hemlight)
 let ambiantlight = new THREE.AmbientLight('#ffffff',.5)
 scene.add(ambiantlight)
 
 var fontLoader = new FontLoader();
 
-        fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+        fontLoader.load('Ubuntu_Regular.json', function(font) {
       
             var textGeometry = new TextGeometry( 'Happy ' + 'Mothers ' + ' Day', {
                 font: font,
                 size:.5,
-                height: .4,
+                height: .3,
                 depth: 0,
                
             });
