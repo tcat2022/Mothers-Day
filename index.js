@@ -22,6 +22,8 @@ const scene = new THREE.Scene();
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI/2.85;
 controls.maxPolarAngle = Math.PI/1.85;
+controls.minDistance = 2;
+controls.maxDistance = 10.5;
 controls.enableDamping = true;
 controls.enablePan = false;
 let textMaterial;
@@ -97,7 +99,6 @@ controls.update();
 
 
     scene.remove(textMesh);
-    createText();
    
 
     scene.remove(plane);
