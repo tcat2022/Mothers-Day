@@ -1,3 +1,4 @@
+alert("Happy Mothers Day")
 import * as THREE from "three";
 import { FontLoader, TextGeometry } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 import { OrbitControls } from 'jsm/controls/OrbitControls.js';
